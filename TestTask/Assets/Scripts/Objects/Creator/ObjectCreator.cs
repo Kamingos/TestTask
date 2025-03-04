@@ -9,11 +9,16 @@ public class ObjectCreator : MonoBehaviour, IObjectCreator
     FMSunflower sunflowerCreateor;
     FMRandom randomCreateor;
 
-    public void Init()
+    // другое
+    Transform parent;
+
+    public void Init(Transform _parent)
     {
         unionCreateor = new();
         sunflowerCreateor = new();
         randomCreateor = new();
+
+        parent = _parent;
     }
 
     public GameObject CreateObject(ObjectType objType)
@@ -37,6 +42,8 @@ public class ObjectCreator : MonoBehaviour, IObjectCreator
         GameObject temp = objectCreator.CreateObject();
 
         temp.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y);
+
+        temp.transform.parent = parent;
 
         return temp;
     }

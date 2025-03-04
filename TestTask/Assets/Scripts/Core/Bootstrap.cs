@@ -4,7 +4,7 @@ public class Bootstrap : MonoBehaviour
 {
     //накидываемые
     [SerializeField] View view;
-    [SerializeField] Transform transformObjects;
+    [SerializeField] public Transform TrParent;
 
     // создаваемые
     private GameController gameController;
@@ -30,7 +30,7 @@ public class Bootstrap : MonoBehaviour
 
         // <-- Object блок
         objectCreator = new();
-        objectCreator.Init();
+        objectCreator.Init(TrParent);
 
         objectController = new();
         objectController.Init(objectCreator);
