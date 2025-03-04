@@ -27,7 +27,6 @@ public class ViewController : MonoBehaviour
                     break;
             }
         };
-        view.Init();
 
         GameStateMachine.OnChange += StateMachineHandler;
     }

@@ -14,10 +14,10 @@ public class View : MonoBehaviour
 
         for (int i = 0; i < buttons.Length; i++)
         {
+            // кэширую, чтобы событие ссылалось на область памяти со своим собственным значением
+            int index = i;
             buttons[i].onClick.AddListener(() =>
             {
-                // кэширую, чтобы событие ссылалось на область памяти со своим собственным значением
-                int index = i;
 
                 OnBtnPressed.Invoke(index);
             });

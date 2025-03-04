@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: SpriteGroup
+  m_EditorClassIdentifier: 
+  m_GroupName: SpriteGroup
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 6ec62e1c9bff0cd4487712e70287e126
+  m_SerializeEntries:
+  - m_GUID: bd19feac5ef190e42a5fd48206076c9f
+    m_Address: farmAtlas
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - sprite
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: a91d4b6e1825864419ff2ab4fad76f11, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: ca839a2e57e7c6c4d968a6d12efc7968, type: 2}
+    - {fileID: 11400000, guid: b74157819f16ad641aa8fa735afc0f01, type: 2}

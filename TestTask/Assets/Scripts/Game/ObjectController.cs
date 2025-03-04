@@ -7,11 +7,14 @@ public class ObjectController : MonoBehaviour
 
     public static List<GameObject> ObjectsPool;
 
+    // инициализация
     public void Init(IObjectCreator _objectCreator)
     {
+        ObjectsPool = new();
         objectCreator = _objectCreator;
     }
 
+    // создание
     public void CreateObject(ObjectType type)
     {
         var temp = objectCreator.CreateObject(type);
