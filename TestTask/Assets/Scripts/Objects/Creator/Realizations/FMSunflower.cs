@@ -3,7 +3,6 @@ using UnityEngine;
 public class FMSunflower : AbstractObjectCreator
 {
     private Sprite sprite;
-    private Transform t;
     public override GameObject CreateObject()
     {
         sprite = AssetDownloader.GetSprite(11);
@@ -14,6 +13,7 @@ public class FMSunflower : AbstractObjectCreator
         SpriteRenderer renderer = temp.AddComponent<SpriteRenderer>();
         BoxCollider2D boxCollider2D = temp.AddComponent<BoxCollider2D>();
         ObjectStateMachine objectStateMachine = temp.AddComponent<ObjectStateMachine>();
+        LayerModule layer = temp.AddComponent<LayerModule>();
 
         MoveModule moveModule = temp.AddComponent<MoveModule>();
         SearchModule searchModule = temp.AddComponent<SearchModule>();
@@ -21,6 +21,7 @@ public class FMSunflower : AbstractObjectCreator
         // инит
         moveModule.Init(objectStateMachine);
         searchModule.Init(objectStateMachine);
+        layer.Init();
 
         // настройки
         renderer.sprite = sprite;
@@ -28,6 +29,10 @@ public class FMSunflower : AbstractObjectCreator
         boxCollider2D.size = new Vector2(1,1);
 
         renderer.sortingOrder = 20;
+
+        temp.tag = "Object";
+
+        boxCollider2D.isTrigger = true;
 
         return temp;
     }

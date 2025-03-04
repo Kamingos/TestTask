@@ -14,7 +14,7 @@ public class Pointer : MonoBehaviour
         if (Camera.main.orthographic)
         {
             // ѕрисваиваем нашему лучу позицию мыши при клике .
-            aHit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            aHit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 100f, 0b111);
 
             MousePosition = aHit.point;
         }

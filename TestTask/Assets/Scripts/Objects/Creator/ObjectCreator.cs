@@ -41,7 +41,7 @@ public class ObjectCreator : MonoBehaviour, IObjectCreator
 
         GameObject temp = objectCreator.CreateObject();
 
-        temp.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y);
+        temp.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, -2);
 
         temp.transform.parent = parent;
 

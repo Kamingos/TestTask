@@ -15,6 +15,8 @@ public static class GameStateMachine
     {
         CurrentState = gm;
 
+        OnChange += _ => { };
+
         OnChange.Invoke(CurrentState);
     }
 }

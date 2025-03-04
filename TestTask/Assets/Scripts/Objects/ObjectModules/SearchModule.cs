@@ -44,10 +44,13 @@ public class SearchModule : MonoBehaviour
 
         if (tempPos == Vector3.zero) yield break;
 
+        tempPos = new Vector3(tempPos.x, tempPos.y, -2f);
+
         Tweener tween = transform.DOMove(tempPos, 0.3f).SetEase(Ease.OutBack);
 
         tempPos = Vector3.zero;
 
         stateMachine.SetRestState();
+        GameStateMachine.SetDefaultMode();
     }
 }

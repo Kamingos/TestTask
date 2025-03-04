@@ -15,6 +15,7 @@ public class MoveModule : MonoBehaviour
     private void OnMouseDown()
     {
         stateMachine.SetDragState();
+        GameStateMachine.SetBuildMode();
         transform.DOScale(1.2f, 0.1f).SetEase(Ease.OutBack);
         GetComponent<SpriteRenderer>().color = myColor;
     }
@@ -27,6 +28,6 @@ public class MoveModule : MonoBehaviour
     {
         stateMachine.SetSearchingState();
         transform.DOScale(1f, 0.1f).SetEase(Ease.OutBack);
-        GetComponent<SpriteRenderer>().color = myColor;
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 }

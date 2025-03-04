@@ -19,6 +19,8 @@ public class Bootstrap : MonoBehaviour
         // <-- подготовка
         assetDownloader = new();
         assetDownloader.Init();
+
+        GameStateMachine.SetDefaultMode();
         // <-- подготовка
 
         // <-- UI блок
