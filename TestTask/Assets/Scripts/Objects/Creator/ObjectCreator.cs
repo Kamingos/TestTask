@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectCreator : MonoBehaviour
+public class ObjectCreator : MonoBehaviour, IObjectCreator
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public void Init()
+    { 
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public GameObject CreateObject(ObjectType objType)
     {
-        
+        return null;
     }
+
 }

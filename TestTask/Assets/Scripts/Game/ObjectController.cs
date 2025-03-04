@@ -1,18 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    IObjectCreator objectCreator;
+
+    public static List<GameObject> ObjectsPool;
+
+    public void Init(IObjectCreator _objectCreator)
     {
-        
+        objectCreator = _objectCreator;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CreateObject(ObjectType type)
     {
-        
+        var temp = objectCreator.CreateObject(type);
+
+        if (!temp) return;
+
+        ObjectsPool.Add(temp);
+        Debug.Log("Добавили Объект: " + temp.name);
     }
 }

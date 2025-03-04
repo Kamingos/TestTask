@@ -1,18 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class UIController : MonoBehaviour
+public class ViewController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private View view;
+
+    // создаю ещё одно событие, которое будет передавать в GameController
+    public event Action<ObjectType> OnBtnPressed;
+    public void Init(View _view)
     {
-        
+        view = _view;
+        view.OnBtnPressed += (_) =>
+        {
+            switch (_)
+            {
+                case 0:
+                    OnBtnPressed.Invoke(ObjectType.Onion);
+                    break;
+                case 1:
+                    OnBtnPressed.Invoke(ObjectType.Sunflower);
+                    break;
+                case 2:
+                    OnBtnPressed.Invoke(ObjectType.Random);
+                    break;
+                default:
+                    break;
+            }
+        };
+        view.Init();
+
+        GameStateMachine.OnChange += StateMachineHandler;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void StateMachineHandler(GameMode gm)
     {
-        
+        switch (gm)
+        {
+            case GameMode.Nothing:
+                break;
+            case GameMode.Default:
+                view.ActivateButttons();
+                break;
+            case GameMode.Building:
+                view.DisableButttons();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        GameStateMachine.OnChange -= StateMachineHandler;
     }
 }

@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private ViewController viewController;
+    private ObjectController objectController;
 
-    // Update is called once per frame
-    void Update()
+    public void Init(ViewController _viewController, ObjectController _objectController)
     {
-        
+        viewController = _viewController;
+        objectController = _objectController;
+
+        viewController.OnBtnPressed += (_) => objectController.CreateObject(_);
     }
 }

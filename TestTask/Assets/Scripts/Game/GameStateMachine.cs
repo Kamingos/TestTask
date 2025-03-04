@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
-public class StateMachine : MonoBehaviour
+
+public static class GameStateMachine
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static event Action<GameMode> OnChange;
 
-    // Update is called once per frame
-    void Update()
+    public static GameMode CurrentState;
+
+    public static void SetNothingMode() => ChangeGameMode(GameMode.Nothing);
+    public static void SetDefaultMode() => ChangeGameMode(GameMode.Default);
+    public static void SetBuildMode() => ChangeGameMode(GameMode.Building);
+
+    private static void ChangeGameMode(GameMode gm)
     {
-        
+        CurrentState = gm;
+
+        OnChange.Invoke(CurrentState);
     }
 }
