@@ -22,7 +22,7 @@ public class FMRandom : AbstractObjectCreator
         // инит
         moveModule.Init(objectStateMachine);
         searchModule.Init(objectStateMachine);
-        layer.Init();
+        layer.Init(objectStateMachine);
 
         // настройки
         renderer.sprite = sprite;

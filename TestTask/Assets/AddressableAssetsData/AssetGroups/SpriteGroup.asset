@@ -20,8 +20,7 @@ MonoBehaviour:
   - m_GUID: bd19feac5ef190e42a5fd48206076c9f
     m_Address: farmAtlas
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - sprite
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: a91d4b6e1825864419ff2ab4fad76f11, type: 2}

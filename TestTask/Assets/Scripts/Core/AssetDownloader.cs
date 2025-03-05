@@ -1,62 +1,53 @@
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.AdaptivePerformance.Provider;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class AssetDownloader : MonoBehaviour
 {
+    private static Dictionary<int, Sprite> spriteDic = new Dictionary<int, Sprite>();
+
     private string atlasPath = "farmAtlas";
 
-    private Texture2D texture;
-
-    private static List<Sprite> sprites;
     public void Init()
     {
-        sprites = new();
-
+        spriteDic = new();
         DownloadAtlas();
     }
 
     //загрузчик атласа
     private void DownloadAtlas()
     {
-        AsyncOperationHandle<Texture2D> handle = Addressables.LoadAssetAsync<Texture2D>(atlasPath);
+        AsyncOperationHandle<Sprite[]> handle = Addressables.LoadAssetAsync<Sprite[]>(atlasPath);
 
         handle.WaitForCompletion();
 
-        if (handle.Status == AsyncOperationStatus.Succeeded)
-        {
-            texture = handle.Result;
+        if (handle.Status != AsyncOperationStatus.Succeeded) return;
 
-            // преобразование Texture2D в суб.текстуры
-            string atlasPath = AssetDatabase.GetAssetPath(texture);
-            Object[] assets = AssetDatabase.LoadAllAssetsAtPath(atlasPath);
+        Sprite[] allSprites = handle.Result;
 
-            foreach (Object asset in assets)
-            {
-                if (AssetDatabase.IsSubAsset(asset))
-                {
-                    // ѕолучаем спрайты из атласа,
-                    sprites.Add(asset as Sprite);
-                }
-            }
-        }
-        else
+        if (allSprites == null || allSprites.Length <= 0)
         {
             Debug.Log("ќшибка загрузки");
+            return;
+        }
+
+        for (int i = 0; i < allSprites.Length; i++)
+        {
+            spriteDic.Add(i, allSprites[i]);
         }
     }
 
-    // получение спрайта из атласа
+    //получение спрайта из атласа
     public static Sprite GetSprite(int index)
     {
-        if (index < 0 || index >= sprites.Count) return null;
+        if (index < 0 || index >= spriteDic.Count) return null;
 
-        return sprites[index];
+        return spriteDic[index];
     }
     public static int GetAtlasLenght()
     {
-        return sprites.Count;
+        return spriteDic.Count;
     }
 }

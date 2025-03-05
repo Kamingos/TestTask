@@ -6,17 +6,17 @@ public class LayerModule : MonoBehaviour
 {
     private List<Collider2D> overlapList;
 
-    public void Init()
+    public void Init(ObjectStateMachine objectStateMachine)
     {
-        GameStateMachine.OnChange += _ => { if (_ == GameMode.Default) SortHandler(); };
+        objectStateMachine.OnChangeState += _ => { if (_ == ObjectState.Rest) SortHandler(); };
     }
 
     private void SortHandler()
     {
         // первая часть - выпускаем колайдер
-        overlapList = Physics2D.OverlapCircleAll(Pointer.MousePosition, 1f, 0x1).ToList();
+        overlapList = Physics2D.OverlapCircleAll(Pointer.MousePosition, 2f, 0x1).ToList();
 
-        overlapList.Remove(overlapList.Find((x) => x.name == GetComponent<BoxCollider2D>().name));
+        overlapList.Remove(overlapList.Find((x) => x.transform.position == gameObject.transform.position));
 
         // вторая часть - ищем ближайший
         overlapList = overlapList.Where(o => o.isTrigger==true).ToList();
@@ -24,15 +24,20 @@ public class LayerModule : MonoBehaviour
 
         Debug.Log(overlapList.Count);
 
-        if (overlapList.Count<1) return;
+        if (overlapList.Count < 1) return;
 
-        if (transform.position.y <= overlapList.First().gameObject.transform.position.y)
+        // временные файлы
+        var tempPos = overlapList.First().gameObject.transform.position;
+        var tempSortLevel = gameObject.GetComponent<SpriteRenderer>();
+        var tempOtherSpriteRenderer = overlapList.First().gameObject.GetComponent<SpriteRenderer>();
+
+        if (transform.position.y <= tempPos.y)
         {
-            gameObject.GetComponent<SpriteRenderer>().sortingOrder = overlapList.First().gameObject.GetComponent<SpriteRenderer>().sortingOrder + 1;
+            tempSortLevel.sortingOrder = tempOtherSpriteRenderer.sortingOrder + 1;
         }
-        else if (transform.position.y > overlapList.First().gameObject.transform.position.y)
+        if (transform.position.y > tempPos.y)
         {
-            overlapList.First().gameObject.GetComponent<SpriteRenderer>().sortingOrder = gameObject.GetComponent<SpriteRenderer>().sortingOrder + 1;
+            tempOtherSpriteRenderer.sortingOrder = tempSortLevel.sortingOrder + 1;
         }
 
     }
